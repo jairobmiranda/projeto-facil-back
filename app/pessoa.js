@@ -12,7 +12,7 @@ class Pessoa {
 
     static async findAll() {
       const { rows } = await pool.query('SELECT * FROM pessoas');
-      return rows.map((row) => new Produto(row.id, row.nome, row.cpf, row.dataNascimento, row.email));
+      return rows.map((row) => new Pessoa(row.id, row.nome, row.cpf, row.dataNascimento, row.email));
     }
 
     static async findById(id) {
@@ -21,7 +21,7 @@ class Pessoa {
         return null;
       }
       const row = rows[0];
-      return new Produto(row.id, row.nome, row.preco);
+      return new Pessoa(row.id, row.nome, row.preco);
     }
 
     async save() {
