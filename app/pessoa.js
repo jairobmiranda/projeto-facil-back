@@ -21,7 +21,7 @@ class Pessoa {
     }
     const row = rows[0];
     return new Pessoa(row.id, row.nome, row.cpf, row.dataNascimento, row.email);
-  }
+  }//comment qqr
 
   async save() {
     if (this.id) {
