@@ -46,7 +46,7 @@ app.put('/pessoas/:id', async (req, res) => {
 });
 
 // Validação de login
-app.put('/pessoasLogin', async (req, res) => {
+app.get('/pessoasLogin', async (req, res) => {
   const { email, senha } = req.body;
   if (email && senha) {
     const pessoa = await Pessoa.login(email, md5(senha));
