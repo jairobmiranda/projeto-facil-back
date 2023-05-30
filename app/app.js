@@ -46,14 +46,14 @@ app.put('/pessoas/:id', async (req, res) => {
 });
 
 // Validação de login
-app.get('/pessoasLogin', async (req, res) => {
+app.post('/pessoasLogin', async (req, res) => {
   const { email, senha } = req.body;
   if (email && senha) {
     const pessoa = await Pessoa.login(email, md5(senha));
     //se true retorna obj pessoa, caso contrário retorna false
     if (pessoa.id == null) {
       msgErro = { 'msgErro': 'Usuário ou senha incorretos.' };
-      res.status(404).json(msgErro);
+      res.status(401).json(msgErro);
     } else {
       res.json(pessoa);
     }
