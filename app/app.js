@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const CrudInterface = require('./CrudInterface');
 const Projeto = require('./Projeto');
+const Convite = require('./Convite');
 
 class App {
     constructor() {
@@ -55,6 +56,27 @@ class App {
         this.app.post('/projetos', projetoCrud.create);
         this.app.put('/projetos/:id', projetoCrud.update);
         this.app.delete('/projetos/:id', projetoCrud.delete);
+
+        // Criar uma instância da classe Convite
+        const conviteCrud = new Convite();
+
+        // Rotas de Convite
+        this.app.get('/convites', conviteCrud.findAll);
+        this.app.get('/convites/:id', conviteCrud.findById);
+        this.app.post('/convites', conviteCrud.create);
+        this.app.put('/convites/:id', conviteCrud.update);
+        this.app.delete('/convites/:id', conviteCrud.delete);
+        this.app.put('/convites/:id/aceitar', conviteCrud.aceitarConvite);
+        this.app.get('/convites/pessoa/:idPessoa', async (req, res) => {
+            const idPessoa = req.params.idPessoa;
+            const convites = await conviteCrud.getConvitesPorPessoa(idPessoa);
+            res.json(convites);
+        });
+        this.app.get('/convites/equipe/:idEquipe', async (req, res) => {
+            const idEquipe = req.params.idEquipe;
+            const convites = await conviteCrud.getConvitesPorEquipe(idEquipe);
+            res.json(convites);
+        });
     }
 
     startServer(port) {
@@ -64,4 +86,4 @@ class App {
     }
 }
 
-module.exports = App;
+module.exports = App
