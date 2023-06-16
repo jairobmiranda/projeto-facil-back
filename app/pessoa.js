@@ -1,59 +1,51 @@
+const CrudInterface = require('./CrudInterface');
 const pool = require('./database');
 
-class Pessoa {
-  constructor(id, nome, cpf, dataNascimento, email, senha) {
-    this.id = id;
-    this.nome = nome;
-    this.cpf = cpf;
-    this.dataNascimento = dataNascimento;
-    this.email = email;
-    this.senha = senha;
-  }
-
-  static async login(email, senha) {
-    const { rows } = await pool.query('SELECT * FROM pessoas WHERE email = $1 AND senha = $2', [email, senha]);
-    if (rows.length === 0) {
-      return new Pessoa(null, null, null, null, null);
+class Pessoa extends CrudInterface {
+    constructor() {
+        super('pessoas');
     }
-    const row = rows[0];
-    return new Pessoa(row.id_pessoa, row.nome_pessoa, row.cpf, row.data_nascimento, row.email);
-  }
 
-  static async findAll() {
-    const { rows } = await pool.query('SELECT * FROM pessoas');
-    return rows.map((row) => new Pessoa(row.id_pessoa, row.nome_pessoa, row.cpf, row.data_nascimento, row.email));
-  }
+    async iniciarAtividade(idPessoa, idAtividade) {
+        const pessoa = await this.findById(idPessoa);
+        if (!pessoa) {
+            return { 'msgErro': 'Pessoa não encontrada.' };
+        }
 
-  static async findById(id) {
-    const { rows } = await pool.query('SELECT * FROM pessoas WHERE id_pessoa = $1', [id]);
-    if (rows.length === 0) {
-      msgErro = { 'msgErro': 'Usuário não localizado.' };
-      return msgErro;
+        const atividade = await this.findById('atividades', idAtividade);
+        if (!atividade) {
+            return { 'msgErro': 'Atividade não encontrada.' };
+        }
+
+        const dataHoraInicio = new Date();
+        // Inserir um novo registro na tabela "atividade_pessoa" com os dados de início da atividade
+        const query = 'INSERT INTO atividade_pessoa (id_pessoa, id_atividade, hora_inicio) VALUES ($1, $2, $3)';
+        await pool.query(query, [idPessoa, idAtividade, dataHoraInicio]);
+
+        return { 'msgSucesso': 'Atividade iniciada com sucesso.' };
     }
-    const row = rows[0];
-    return new Pessoa(row.id_pessoa, row.nome_pessoa, row.cpf, row.data_nascimento, row.email);
-  }
 
-  async save() {
-    if (this.id) {
-      await pool.query('UPDATE pessoas SET nome_pessoa = $1, cpf = $2, email = $3 WHERE id_pessoa = $4', [this.nome, this.cpf, this.email, this.id]);
-    } else {
-      const { rows } = await pool.query('INSERT INTO pessoas (nome_pessoa, cpf, data_nascimento, email, senha) VALUES ($1, $2, $3, $4, $5) RETURNING id_pessoa', [this.nome, this.cpf, this.dataNascimento, this.email, this.senha]);
-      this.id = rows[0].id;
-    }
-  }
+    async pararAtividade(idPessoa, idAtividade) {
+        const pessoa = await this.findById(idPessoa);
+        if (!pessoa) {
+            return { 'msgErro': 'Pessoa não encontrada.' };
+        }
 
-  async delete() {
-    await pool.query('DELETE FROM pessoas WHERE id = $1', [this.id]);
-  }
-  /*
-    async codificarMD5(string) {
-      const hash = crypto.createHash('md5');
-      hash.update(string);
-      return hash.digest('hex');
+        const atividade = await this.findById('atividades', idAtividade);
+        if (!atividade) {
+            return { 'msgErro': 'Atividade não encontrada.' };
+        }
+
+        const dataHoraParada = new Date();
+        // Atualizar o campo "hora_fim" no registro correspondente na tabela "atividade_pessoa"
+        const query = 'UPDATE atividade_pessoa SET hora_fim = $1 WHERE id_pessoa = $2 AND id_atividade = $3';
+        await pool.query(query, [dataHoraParada, idPessoa, idAtividade]);
+
+        // Calcular a duração da atividade
+        const duracao = dataHoraParada - atividade.hora_inicio;
+
+        return { 'msgSucesso': 'Atividade parada com sucesso.', 'duracao': duracao };
     }
-  */
 }
-
 
 module.exports = Pessoa;

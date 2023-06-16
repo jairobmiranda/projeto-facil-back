@@ -1,0 +1,288 @@
+//Rotas de Pessoa:
+//Obter todas as pessoas:
+//json
+{
+  "rota": "/pessoas",
+  "metodo": "GET",
+  "descricao": "Obter todas as pessoas",
+  "resultadoEsperado": "Lista de todas as pessoas cadastradas",
+  "statusEsperado": 200
+}
+//Obter pessoa por ID:
+//json
+{
+  "rota": "/pessoas/1",
+  "metodo": "GET",
+  "descricao": "Obter pessoa por ID",
+  "resultadoEsperado": "Dados da pessoa com ID 1",
+  "statusEsperado": 200
+}
+//Criar uma pessoa:
+//json
+{
+  "rota": "/pessoas",
+  "metodo": "POST",
+  "descricao": "Criar uma pessoa",
+  "corpo": {
+    "nome": "Jo�o Silva",
+    "idade": 30,
+    "email": "joao.silva@example.com"
+  },
+  "resultadoEsperado": "Pessoa criada com sucesso",
+  "statusEsperado": 201
+}
+//Atualizar uma pessoa:
+//json
+{
+  "rota": "/pessoas/1",
+  "metodo": "PUT",
+  "descricao": "Atualizar uma pessoa",
+  "corpo": {
+    "nome": "Jo�o da Silva",
+    "idade": 35,
+    "email": "joao.silva@example.com"
+  },
+  "resultadoEsperado": "Pessoa atualizada com sucesso",
+  "statusEsperado": 200
+}
+//Deletar uma pessoa:
+//json
+{
+  "rota": "/pessoas/1",
+  "metodo": "DELETE",
+  "descricao": "Deletar uma pessoa",
+  "resultadoEsperado": "Pessoa deletada com sucesso",
+  "statusEsperado": 200
+}
+//Rotas de Atividade:
+//Obter todas as atividades:
+//json
+{
+  "rota": "/atividades",
+  "metodo": "GET",
+  "descricao": "Obter todas as atividades",
+  "resultadoEsperado": "Lista de todas as atividades cadastradas",
+  "statusEsperado": 200
+}
+//Obter atividade por ID:
+//json
+{
+  "rota": "/atividades/1",
+  "metodo": "GET",
+  "descricao": "Obter atividade por ID",
+  "resultadoEsperado": "Dados da atividade com ID 1",
+  "statusEsperado": 200
+}
+//Criar uma atividade:
+//json
+{
+  "rota": "/atividades",
+  "metodo": "POST",
+  "descricao": "Criar uma atividade",
+  "corpo": {
+    "titulo": "Atividade 1",
+    "descricao": "Descri��o da atividade 1",
+    "data": "2023-06-15",
+    "hora": "10:00"
+  },
+  "resultadoEsperado": "Atividade criada com sucesso",
+  "statusEsperado": 201
+}
+//Atualizar uma atividade:
+//json
+{
+  "rota": "/atividades/1",
+  "metodo": "PUT",
+  "descricao": "Atualizar uma atividade",
+  "corpo": {
+    "titulo": "Atividade 1 atualizada",
+    "descricao": "Descri��o da atividade 1 atualizada",
+    "data": "2023-06-15",
+    "hora": "14:00"
+  },
+  "resultadoEsperado": "Atividade atualizada com sucesso",
+  "statusEsperado": 200
+}
+//Deletar uma atividade:
+//json
+{
+  "rota": "/atividades/1",
+  "metodo": "DELETE",
+  "descricao": "Deletar uma atividade",
+  "resultadoEsperado": "Atividade deletada com sucesso",
+  "statusEsperado": 200
+}
+//Rotas de Equipe:
+//Obter todas as equipes:
+//json
+{
+  "rota": "/equipes",
+  "metodo": "GET",
+  "descricao": "Obter todas as equipes",
+  "resultadoEsperado": "Lista de todas as equipes cadastradas",
+  "statusEsperado": 200
+}
+//Obter equipe por ID:
+//json
+{
+  "rota": "/equipes/1",
+  "metodo": "GET",
+  "descricao": "Obter equipe por ID",
+  "resultadoEsperado": "Dados da equipe com ID 1",
+  "statusEsperado": 200
+}
+//Criar uma equipe:
+//json
+{
+  "rota": "/equipes",
+  "metodo": "POST",
+  "descricao": "Criar uma equipe",
+  "corpo": {
+    "nome": "Equipe 1",
+    "descricao": "Descri��o da Equipe 1"
+  },
+  "resultadoEsperado": "Equipe criada com sucesso",
+  "statusEsperado": 201
+}
+//Atualizar uma equipe:
+//json
+{
+  "rota": "/equipes/1",
+  "metodo": "PUT",
+  "descricao": "Atualizar uma equipe",
+  "corpo": {
+    "nome": "Equipe 1 atualizada",
+    "descricao": "Descri��o da Equipe 1 atualizada"
+  },
+  "resultadoEsperado": "Equipe atualizada com sucesso",
+  "statusEsperado": 200
+}
+//Deletar uma equipe:
+//json
+{
+  "rota": "/equipes/1",
+  "metodo": "DELETE",
+  "descricao": "Deletar uma equipe",
+  "resultadoEsperado": "Equipe deletada com sucesso",
+  "statusEsperado": 200
+}
+//Rotas de Projeto:
+//Obter todos os projetos:
+//json
+{
+  "rota": "/projetos",
+  "metodo": "GET",
+  "descricao": "Obter todos os projetos",
+  "resultadoEsperado": "Lista de todos os projetos cadastrados",
+  "statusEsperado": 200
+}
+//Obter projeto por ID:
+//json
+{
+  "rota": "/projetos/1",
+  "metodo": "GET",
+  "descricao": "Obter projeto por ID",
+  "resultadoEsperado": "Dados do projeto com ID 1",
+  "statusEsperado": 200
+}
+//Criar um projeto:
+//json
+{
+  "rota": "/projetos",
+  "metodo": "POST",
+  "descricao": "Criar um projeto",
+  "corpo": {
+    "nome": "Projeto 1",
+    "descricao": "Descri��o do Projeto 1",
+    "equipeId": 1,
+    "dataInicio": "2023-06-15",
+    "dataFim": "2023-06-30"
+  },
+  "resultadoEsperado": "Projeto criado com sucesso",
+  "statusEsperado": 201
+}
+//Atualizar um projeto:
+//json
+{
+  "rota": "/projetos/1",
+  "metodo": "PUT",
+  "descricao": "Atualizar um projeto",
+  "corpo": {
+    "nome": "Projeto 1 atualizado",
+    "descricao": "Descri��o do Projeto 1 atualizado",
+    "equipeId": 1,
+    "dataInicio": "2023-06-15",
+    "dataFim": "2023-07-15"
+  },
+  "resultadoEsperado": "Projeto atualizado com sucesso",
+  "statusEsperado": 200
+}
+//Deletar um projeto:
+//json
+{
+  "rota": "/projetos/1",
+  "metodo": "DELETE",
+  "descricao": "Deletar um projeto",
+  "resultadoEsperado": "Projeto deletado com sucesso",
+  "statusEsperado": 200
+}
+//Rotas de Convite:
+//Obter todos os convites:
+//json
+{
+  "rota": "/convites",
+  "metodo": "GET",
+  "descricao": "Obter todos os convites",
+  "resultadoEsperado": "Lista de todos os convites cadastrados",
+  "statusEsperado": 200
+}
+//Obter convite por ID:
+//json
+{
+  "rota": "/convites/1",
+  "metodo": "GET",
+  "descricao": "Obter convite por ID",
+  "resultadoEsperado": "Dados do convite com ID 1",
+  "statusEsperado": 200
+}
+//Criar um convite:
+//json
+{
+  "rota": "/convites",
+  "metodo": "POST",
+  "descricao": "Criar um convite",
+  "corpo": {
+    "pessoaId": 1,
+    "equipeId": 1
+  },
+  "resultadoEsperado": "Convite criado com sucesso",
+  "statusEsperado": 201
+}
+//Atualizar um convite:
+//json
+{
+  "rota": "/convites/1",
+  "metodo": "PUT",
+  "descricao": "Atualizar um convite",
+  "corpo": {
+    "status": "Aceito"
+  },
+  "resultadoEsperado": "Convite atualizado com sucesso",
+  "statusEsperado": 200
+}
+//Deletar um convite:
+{
+  "caso": "Deletar um convite",
+  "metodo": "DELETE",
+  "descricao": "Deletar um convite existente",
+  "endpoint": "/convites/:id",
+  "body": {},
+  "headers": {},
+  "params": {
+    "id": "ID_DO_CONVITE"
+  },
+  "resultadoEsperado": {
+    "status": 200,
+    "responseBody": "Convite deletado com sucesso"
+  }
+}
