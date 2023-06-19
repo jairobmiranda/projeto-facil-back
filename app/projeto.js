@@ -1,9 +1,8 @@
-const CrudInterface = require('./CrudInterface');
 
-class Projeto extends CrudInterface {
-    constructor() {
-        super('projetos');
-    }
+
+class Projeto  {
+   
+    
 }
 
 module.exports = Projeto;
