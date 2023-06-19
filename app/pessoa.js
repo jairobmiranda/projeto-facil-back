@@ -1,4 +1,7 @@
+
 const pool = require('./database');
+const md5 = require('md5')
+
 
 class pessoa {
     async findAll(req, res) {
@@ -46,7 +49,7 @@ class pessoa {
         try {
             const { nome, cpf, dataNascimento, email, senha } = req.body;
             const query = `INSERT INTO pessoas (nome_pessoa, cpf, data_nascimento, email, senha) VALUES ($1, $2, $3, $4, $5) RETURNING id`;
-            const values = [nome, cpf, dataNascimento, email, senha];
+            const values = [nome, cpf, dataNascimento, email, md5(senha)];
             const { rows } = await pool.query(query, values);
             const pessoa = {
                 id: rows[0].id,
@@ -94,7 +97,7 @@ class pessoa {
         try {
             const { email, senha } = req.body;
             const query = `SELECT * FROM pessoas WHERE email = $1 AND senha = $2`;
-            const values = [email, senha];
+            const values = [email, md5(senha)];
             const { rows } = await pool.query(query, values);
             if (rows.length === 0) {
                 res.status(401).json({ error: 'Credenciais inválidas.' });

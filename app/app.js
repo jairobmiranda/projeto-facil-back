@@ -1,12 +1,12 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-
-const Projeto = require('./Projeto');
-const Convite = require('./Convite');
+const Projeto = require('./projeto');
+const Convite = require('./convite');
 const Pessoa = require('./pessoa');
 const Atividade = require('./atividade');
 const Equipe = require('./equipe');
+
 
 class App {
     constructor() {
