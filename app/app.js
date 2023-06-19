@@ -23,12 +23,12 @@ class App {
         const pessoaCrud = new Pessoa();
 
             // Rotas de Pessoa
-            this.app.get('/pessoas', pessoaCrud.findAll.bind(pessoaCrud));
-            this.app.get('/pessoas/:id', pessoaCrud.findById.bind(pessoaCrud));
-            this.app.post('/pessoas', pessoaCrud.create.bind(pessoaCrud));
-            this.app.put('/pessoas/:id', pessoaCrud.update.bind(pessoaCrud));
-            this.app.post('/pessoasLogin', pessoaCrud.login.bind(pessoaCrud));
-            this.app.delete('/pessoas/:id', pessoaCrud.delete.bind(pessoaCrud));
+          this.app.get('/pessoas', pessoaCrud.findAll.bind(pessoaCrud));
+          this.app.get('/pessoas/:id', pessoaCrud.findById.bind(pessoaCrud));
+          this.app.post('/pessoas', pessoaCrud.create.bind(pessoaCrud));
+          this.app.put('/pessoas/:id', pessoaCrud.update.bind(pessoaCrud));
+          this.app.post('/pessoasLogin', pessoaCrud.login.bind(pessoaCrud));
+          this.app.delete('/pessoas/:id', pessoaCrud.delete.bind(pessoaCrud));
 
 
         // Criar uma instância do CrudInterface para a entidade Atividade
@@ -47,45 +47,36 @@ class App {
 
 
     //    // Criar uma instância do CrudInterface para a entidade Equipe
-    //    const equipeCrud = new Equipe();
+      const equipeCrud = new Equipe();
 
     //    // Rotas de Equipe
-    //    this.app.get('/equipes', equipeCrud.findAll);
-    //    this.app.get('/equipes/:id', equipeCrud.findById);
-    //    this.app.post('/equipes', equipeCrud.create);
-    //    this.app.put('/equipes/:id', equipeCrud.update);
-    //    this.app.delete('/equipes/:id', equipeCrud.delete);
+        this.app.get('/equipes', equipeCrud.findAll);
+        this.app.get('/equipes/:id', equipeCrud.findById);
+        this.app.post('/equipes', equipeCrud.create);
+        this.app.put('/equipes/:id', equipeCrud.update);
+        this.app.delete('/equipes/:id', equipeCrud.delete);
 
-    //    // Criar uma instância da classe Projeto
-    //    const projetoCrud = new Projeto();
+        // Criar uma instância da classe Projeto
+        const projetoCrud = new Projeto();
 
-    //    // Rotas de Projeto
-    //    this.app.get('/projetos', projetoCrud.findAll);
-    //    this.app.get('/projetos/:id', projetoCrud.findById);
-    //    this.app.post('/projetos', projetoCrud.create);
-    //    this.app.put('/projetos/:id', projetoCrud.update);
-    //    this.app.delete('/projetos/:id', projetoCrud.delete);
+        // Rotas de Projeto
+        this.app.get('/projetos', projetoCrud.findAll);
+        this.app.get('/projetos/:id', projetoCrud.findById);
+        this.app.post('/projetos', projetoCrud.create);
+        this.app.put('/projetos/:id', projetoCrud.update);
+        this.app.delete('/projetos/:id', projetoCrud.delete);
 
-    //    // Criar uma instância da classe Convite
-    //    const conviteCrud = new Convite();
+        // Criar uma instância da classe Convite
+        const conviteCrud = new Convite();
 
-    //    // Rotas de Convite
-    //    this.app.get('/convites', conviteCrud.findAll);
-    //    this.app.get('/convites/:id', conviteCrud.findById);
-    //    this.app.post('/convites', conviteCrud.create);
-    //    this.app.put('/convites/:id', conviteCrud.update);
-    //    this.app.delete('/convites/:id', conviteCrud.delete);
-    //    this.app.put('/convites/:id/aceitar', conviteCrud.aceitarConvite);
-    //    this.app.get('/convites/pessoa/:idPessoa', async (req, res) => {
-    //        const idPessoa = req.params.idPessoa;
-    //        const convites = await conviteCrud.getConvitesPorPessoa(idPessoa);
-    //        res.json(convites);
-    //    });
-    //    this.app.get('/convites/equipe/:idEquipe', async (req, res) => {
-    //        const idEquipe = req.params.idEquipe;
-    //        const convites = await conviteCrud.getConvitesPorEquipe(idEquipe);
-    //        res.json(convites);
-    //    });
+        // Rotas de Convite
+           this.app.get('/convites', conviteCrud.findAll);
+        this.app.get('/convites/:id', conviteCrud.findById);
+        this.app.post('/convites', conviteCrud.create);
+        this.app.put('/convites/:id', conviteCrud.update);
+        this.app.delete('/convites/:id', conviteCrud.delete);
+        this.app.post('/convites/enviar', conviteCrud.enviarConvite);
+    
     }
 
     startServer(port) {
