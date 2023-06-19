@@ -1,9 +1,12 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const CrudInterface = require('./CrudInterface');
+
 const Projeto = require('./Projeto');
 const Convite = require('./Convite');
+const Pessoa = require('./pessoa');
+const Atividade = require('./atividade');
+const Equipe = require('./equipe');
 
 class App {
     constructor() {
@@ -17,18 +20,19 @@ class App {
 
     initializeRoutes() {
         // Criar uma instância do CrudInterface para a entidade Pessoa
-        const pessoaCrud = new CrudInterface('pessoas');
+        const pessoaCrud = new Pessoa();
 
-        // Rotas de Pessoa
-        this.app.get('/pessoas', pessoaCrud.findAll);
-        this.app.get('/pessoas/:id', pessoaCrud.findById);
-        this.app.post('/pessoas', pessoaCrud.create);
-        this.app.put('/pessoas/:id', pessoaCrud.update);
-        this.app.post('/pessoasLogin', pessoaCrud.login);
-        this.app.delete('/pessoas/:id', pessoaCrud.delete);
+            // Rotas de Pessoa
+          this.app.get('/pessoas', pessoaCrud.findAll.bind(pessoaCrud));
+          this.app.get('/pessoas/:id', pessoaCrud.findById.bind(pessoaCrud));
+          this.app.post('/pessoas', pessoaCrud.create.bind(pessoaCrud));
+          this.app.put('/pessoas/:id', pessoaCrud.update.bind(pessoaCrud));
+          this.app.post('/pessoasLogin', pessoaCrud.login.bind(pessoaCrud));
+          this.app.delete('/pessoas/:id', pessoaCrud.delete.bind(pessoaCrud));
+
 
         // Criar uma instância do CrudInterface para a entidade Atividade
-        const atividadeCrud = new CrudInterface('atividades');
+        const atividadeCrud = new Atividade();
 
         // Rotas de Atividade
         this.app.get('/atividades', atividadeCrud.findAll);
@@ -36,11 +40,16 @@ class App {
         this.app.post('/atividades', atividadeCrud.create);
         this.app.put('/atividades/:id', atividadeCrud.update);
         this.app.delete('/atividades/:id', atividadeCrud.delete);
+        this.app.post('/atividades/iniciar', atividadeCrud.iniciarAtividade);
+        this.app.post('/atividades/parar', atividadeCrud.pararAtividade);
+        this.app.get('/atividades/codigo/:codigo', atividadeCrud.findByCodigo);
 
-        // Criar uma instância do CrudInterface para a entidade Equipe
-        const equipeCrud = new CrudInterface('equipes');
 
-        // Rotas de Equipe
+
+    //    // Criar uma instância do CrudInterface para a entidade Equipe
+      const equipeCrud = new Equipe();
+
+    //    // Rotas de Equipe
         this.app.get('/equipes', equipeCrud.findAll);
         this.app.get('/equipes/:id', equipeCrud.findById);
         this.app.post('/equipes', equipeCrud.create);
@@ -61,22 +70,13 @@ class App {
         const conviteCrud = new Convite();
 
         // Rotas de Convite
-        this.app.get('/convites', conviteCrud.findAll);
+           this.app.get('/convites', conviteCrud.findAll);
         this.app.get('/convites/:id', conviteCrud.findById);
         this.app.post('/convites', conviteCrud.create);
         this.app.put('/convites/:id', conviteCrud.update);
         this.app.delete('/convites/:id', conviteCrud.delete);
-        this.app.put('/convites/:id/aceitar', conviteCrud.aceitarConvite);
-        this.app.get('/convites/pessoa/:idPessoa', async (req, res) => {
-            const idPessoa = req.params.idPessoa;
-            const convites = await conviteCrud.getConvitesPorPessoa(idPessoa);
-            res.json(convites);
-        });
-        this.app.get('/convites/equipe/:idEquipe', async (req, res) => {
-            const idEquipe = req.params.idEquipe;
-            const convites = await conviteCrud.getConvitesPorEquipe(idEquipe);
-            res.json(convites);
-        });
+        this.app.post('/convites/enviar', conviteCrud.enviarConvite);
+    
     }
 
     startServer(port) {
